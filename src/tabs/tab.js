@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const Tab = React.forwardRef(
-  ({ match, active, item, animating, startAnimating }, ref) => (
-    <li className="tabs-list__item" key={`button-${item.name}`}>
+  ({ active, item, animating, startAnimating }, ref) => (
+    <li className="tabs-list__item" key={`tab-${item.route}`}>
       <Link
         to={item.route}
-        className={`tabs-list__tab ${active ? 'active' : 'inactive'} ${animating}`}
+        className={`tabs-list__tab ${active ? 'active' : 'inactive'} ${animating ? 'animating' : ''}`}
         ref={ref}
         onClick={startAnimating}
       >
@@ -18,16 +18,12 @@ const Tab = React.forwardRef(
 );
 
 Tab.propTypes = {
-  match: PropTypes.shape({
-    url: PropTypes.string,
-  }).isRequired,
   item: PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.string,
     route: PropTypes.string,
   }).isRequired,
   active: PropTypes.bool.isRequired,
-  animating: PropTypes.oneOf(['init', 'animating', 'stopped']).isRequired,
+  animating: PropTypes.bool.isRequired,
   startAnimating: PropTypes.func.isRequired,
 };
 

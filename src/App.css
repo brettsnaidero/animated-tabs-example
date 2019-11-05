@@ -1,20 +1,30 @@
+/* Tabs wrapper */
 .tabs {
-  display: block;
+  position: relative;
 }
 
+/* Tabs list */
 .tabs-list {
   display: flex;
-  border-bottom: 1px solid #ecf0f5;
-  position: relative;
+  border-bottom: 1px solid #DFDFDF;
 }
 
 .tabs-list__item {
   margin-right: 30px;
 }
 
+@media (max-width: 800px) {
+  .tabs-list__item {
+    flex: 1 1 auto;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+/* Tab buttons/links */
 .tabs-list__tab {
   display: block;
-  color: #2c3642;
+  color: #2C2C2C;
   padding: 18px 6px;
   background: none;
   transition: background-color 600ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,6 +34,11 @@
   white-space: nowrap;
 }
 
+.tabs-list__tab:hover {
+  color: green;
+}
+
+/* Static active state underline */
 .tabs-list__tab:after {
   content: '';
   position: absolute;
@@ -33,27 +48,26 @@
   width: 100%;
 }
 
-.tabs-list__tab:hover {
-  color: green;
-}
-
 .tabs-list__tab.active:after {
   background-color: green;
 }
 
+/* Hide static active underline while animating */
 .tabs-list__tab.active.animating:after {
   background-color: transparent;
 }
 
+/* Animated underline */
 .tabs-list__underline {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 3px;
   background-color: green;
-  opacity: 0;
 }
 
-.tabs-list__underline.animating {
-  opacity: 1;
+/* Tab Content */
+.tab-content {
+  padding: 30px;
+  background: #EFEFEF;
 }

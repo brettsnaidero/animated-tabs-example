@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect, matchPath, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, matchPath, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Tab from './tab';
 import Underline from './underline';
 
-const Tabs = ({ items, match, location }) => {
-  const [animating, setAnimating] = React.useState('init');
+const Tabs = ({ items }) => {
+  const [animating, setAnimating] = React.useState(false);
 
   const tabRefs = items.reduce((acc, item) => {
-    acc[item.id] = React.createRef();
+    acc[item.route] = React.createRef();
     return acc;
   }, {});
 
-  const startAnimating = () => {
-    setAnimating('animating');
-  };
+  const location = useLocation();
 
-  const finishAnimating = () => {
-    setAnimating('stopped');
-  };
-
+  // Find active path
   const active = items.find((item) =>
     matchPath(location.pathname, {
       path: `/${item.route}`,
@@ -27,40 +23,63 @@ const Tabs = ({ items, match, location }) => {
     }),
   );
 
-  const activeId = active && active.id;
+  const activeRoute = active && active.route;
 
   return (
-    <div className="tabs">
-      <ul role="tablist" aria-orientation="horizontal" className="tabs-list">
-        {items.map((item) => (
-          <Tab
-            key={item.id}
-            match={match}
-            location={location}
-            item={item}
-            ref={tabRefs[item.id]}
-            active={activeId === item.id}
-            startAnimating={startAnimating}
-            animating={animating}
-          />
-        ))}
+    <React.Fragment>
+      <div className="tabs">
+        <ul role="tablist" aria-orientation="horizontal" className="tabs-list">
+          {items.map((item) => (
+            <Tab
+              key={item.route}
+              location={location}
+              item={item}
+              ref={tabRefs[item.route]}
+              active={activeRoute === item.route}
+              animating={animating}
+              startAnimating={() => setAnimating(true)}
+            />
+          ))}
+        </ul>
         <Underline
-          activeTabRef={tabRefs[activeId]}
-          finishAnimating={finishAnimating}
+          refs={tabRefs}
+          activeRoute={activeRoute}
+          finishAnimating={() => setAnimating(false)}
           animating={animating}
         />
-      </ul>
-      <Switch>
-        {items.map((item) => (
+      </div>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
+          {items.map((item) => (
+            <Route
+              key={item.route}
+              path={`/${item.route}`}
+              render={() => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {item.render()}
+                </motion.div>
+              )}
+            />
+          ))}
+          {/*
+            Need to wrap the redirect in a motion component with an "exit" defined
+            https://www.framer.com/api/motion/animate-presence/#animating-custom-components
+          */}
           <Route
-            key={item.id}
-            path={`/${item.route}`}
-            render={item.render}
+            key="redirection"
+            render={() => (
+              <motion.div exit={{ opacity: 0 }}>
+                <Redirect to={items[0] ? `/${items[0].route}` : '/'} />
+              </motion.div>
+            )}
           />
-        ))}
-        <Route render={() => <Redirect to={items[0] ? items[0].route : '/'} />} />
-      </Switch>
-    </div>
+        </Switch>
+      </AnimatePresence>
+    </React.Fragment>
   );
 };
 
@@ -69,19 +88,12 @@ Tabs.defaultProps = {
 };
 
 Tabs.propTypes = {
-  match: PropTypes.shape({
-    url: PropTypes.string,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }).isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
       name: PropTypes.string,
       route: PropTypes.route,
     }),
   ),
 };
 
-export default withRouter(Tabs);
+export default Tabs;
