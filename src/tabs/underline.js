@@ -4,29 +4,29 @@ import { motion } from 'framer-motion';
 import debounce from '../utils/debounce';
 
 const Underline = ({ refs, activeRoute, finishAnimating, animating }) => {
-  const [attrs, setAttrs] = React.useState({
-    left: 0,
+  const [{ x, width }, setAttributes] = React.useState({
+    x: 0,
     width: 0,
   });
 
-  React.useEffect(() => {
+  const updateAttributes = React.useCallback(() => {
     if (refs && refs[activeRoute]) {
-      setAttrs({
-        left: refs[activeRoute].current.offsetLeft,
+      setAttributes({
+        x: refs[activeRoute].current.offsetLeft,
         width: refs[activeRoute].current.getBoundingClientRect().width,
       });
     }
-  }, [activeRoute, refs]);
+  }, [activeRoute, refs])
+
+  // Update attributes if active route changes (or refs change)
+  React.useEffect(() => {
+    updateAttributes();
+  }, [activeRoute, refs, updateAttributes]);
 
   // After window resize, recalculate
   React.useEffect(() => {
     const recalculateAttrs = debounce(() => {
-      if (refs && refs[activeRoute]) {
-        setAttrs({
-          left: refs[activeRoute].current.offsetLeft,
-          width: refs[activeRoute].current.getBoundingClientRect().width,
-        });
-      }
+      updateAttributes();
     }, 500);
 
     window.addEventListener('resize', recalculateAttrs);
@@ -39,15 +39,11 @@ const Underline = ({ refs, activeRoute, finishAnimating, animating }) => {
     <motion.div
       className="tabs-list__underline"
       animate={{
-        x: attrs.left,
-        width: attrs.width,
+        x,
+        width,
       }}
       style={{
         opacity: animating ? 1 : 0,
-      }}
-      transition={{
-        duration: 0.4,
-        ease: 'easeInOut',
       }}
       onAnimationComplete={finishAnimating}
     />
