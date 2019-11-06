@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/animated-tabs-example/static/css/main.1767625e.chunk.css",
+    "main.js": "/animated-tabs-example/static/js/main.1348fcdc.chunk.js",
+    "main.js.map": "/animated-tabs-example/static/js/main.1348fcdc.chunk.js.map",
+    "runtime-main.js": "/animated-tabs-example/static/js/runtime-main.17b19cfe.js",
+    "runtime-main.js.map": "/animated-tabs-example/static/js/runtime-main.17b19cfe.js.map",
+    "static/js/2.8b2428e6.chunk.js": "/animated-tabs-example/static/js/2.8b2428e6.chunk.js",
+    "static/js/2.8b2428e6.chunk.js.map": "/animated-tabs-example/static/js/2.8b2428e6.chunk.js.map",
+    "index.html": "/animated-tabs-example/index.html",
+    "precache-manifest.3a8838e00d134c9107adf0499c498589.js": "/animated-tabs-example/precache-manifest.3a8838e00d134c9107adf0499c498589.js",
+    "service-worker.js": "/animated-tabs-example/service-worker.js",
+    "static/css/main.1767625e.chunk.css.map": "/animated-tabs-example/static/css/main.1767625e.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.17b19cfe.js",
+    "static/js/2.8b2428e6.chunk.js",
+    "static/css/main.1767625e.chunk.css",
+    "static/js/main.1348fcdc.chunk.js"
+  ]
+}
