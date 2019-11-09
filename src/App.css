@@ -1,3 +1,9 @@
+:root {
+  --line-size: 3px;
+  --line-colour: #74c6e5;
+  --hover-colour: #07698e;
+}
+
 /* Tabs wrapper */
 .tabs {
   position: relative;
@@ -6,7 +12,7 @@
 /* Tabs list */
 .tabs-list {
   display: flex;
-  border-bottom: 1px solid #DFDFDF;
+  border-bottom: var(--line-size) solid #DFDFDF;
 }
 
 .tabs-list__item {
@@ -35,21 +41,21 @@
 }
 
 .tabs-list__tab:hover {
-  color: green;
+  color: var(--hover-colour);
 }
 
 /* Static active state underline */
 .tabs-list__tab:after {
   content: '';
   position: absolute;
-  bottom: -1px;
+  top: 100%;
   left: 0;
-  height: 3px;
+  height: var(--line-size);
   width: 100%;
 }
 
 .tabs-list__tab.active:after {
-  background-color: green;
+  background-color: var(--line-colour);
 }
 
 /* Hide static active underline while animating */
@@ -62,8 +68,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 3px;
-  background-color: green;
+  height: var(--line-size);
+  background-color: var(--line-colour);
 }
 
 /* Tab Content */
