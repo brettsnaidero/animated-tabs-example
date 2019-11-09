@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/animated-tabs-example/static/css/main.1767625e.chunk.css",
+    "main.css": "/animated-tabs-example/static/css/main.711bc9ed.chunk.css",
     "main.js": "/animated-tabs-example/static/js/main.af1783f8.chunk.js",
     "main.js.map": "/animated-tabs-example/static/js/main.af1783f8.chunk.js.map",
     "runtime-main.js": "/animated-tabs-example/static/js/runtime-main.17b19cfe.js",
@@ -8,14 +8,14 @@
     "static/js/2.8b2428e6.chunk.js": "/animated-tabs-example/static/js/2.8b2428e6.chunk.js",
     "static/js/2.8b2428e6.chunk.js.map": "/animated-tabs-example/static/js/2.8b2428e6.chunk.js.map",
     "index.html": "/animated-tabs-example/index.html",
-    "precache-manifest.39b51a1f18427762ac8b99ab9fd8111a.js": "/animated-tabs-example/precache-manifest.39b51a1f18427762ac8b99ab9fd8111a.js",
+    "precache-manifest.b49e557668877299124e8096d7e4d473.js": "/animated-tabs-example/precache-manifest.b49e557668877299124e8096d7e4d473.js",
     "service-worker.js": "/animated-tabs-example/service-worker.js",
-    "static/css/main.1767625e.chunk.css.map": "/animated-tabs-example/static/css/main.1767625e.chunk.css.map"
+    "static/css/main.711bc9ed.chunk.css.map": "/animated-tabs-example/static/css/main.711bc9ed.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.17b19cfe.js",
     "static/js/2.8b2428e6.chunk.js",
-    "static/css/main.1767625e.chunk.css",
+    "static/css/main.711bc9ed.chunk.css",
     "static/js/main.af1783f8.chunk.js"
   ]
 }
